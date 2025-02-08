@@ -1,0 +1,36 @@
+services:
+  slsdb:
+    image: bitnami/postgresql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USERNAME=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=slsdb
+    volumes:
+      - slsdb:/bitnami/postgresql
+
+  slsapi:
+
+    image: kaiserInc/sls-api
+    build: 
+      context: .
+      dockerfile: dockerfile
+      target: develop
+    ports:
+      - 3333:3333
+      - 5555:5555
+    volumes:
+      - .:/usr/app
+      - /usr/app/node_modules
+    environment:
+      - DATABASE_URL=postgresql://docker:docker@slsdb:5432/slsdb?schema=public
+      - NODE_ENV=dev
+    depends_on:
+      - slsdb
+
+
+    
+volumes:
+    slsdb:
+    slsapi:

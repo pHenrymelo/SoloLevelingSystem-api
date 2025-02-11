@@ -26,6 +26,7 @@ services:
     environment:
       - DATABASE_URL=postgresql://docker:docker@slsdb:5432/slsdb?schema=public
       - NODE_ENV=dev
+      - JWT_SECRET=arise
     depends_on:
       - slsdb
 

@@ -30,7 +30,22 @@ export const auth = async (request: FastifyRequest, reply: FastifyReply) => {
             },
         })
 
-        return reply.status(200).send({
+        const refreshToken = await reply.jwtSign(
+            {}, 
+            {
+            sign: {
+                sub: user.id,
+                expiresIn: '7d'
+            },
+        })
+
+        return reply.setCookie('refreshToken', refreshToken, {
+            path: '/',
+            secure: true,
+            sameSite: true,
+            httpOnly: true
+        })
+        .status(200).send({
             token
         })
 

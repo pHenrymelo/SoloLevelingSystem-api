@@ -1,4 +1,4 @@
-import { prismaUsersRepository } from "@/repositories/prisma/prisma-users-repository";
+import { PrismaUsersRepository } from "@/repositories/prisma/prisma-users-repository";
 import { AuthenticateUseCase } from "@/services/authenticate";
 import { InvalidCredentialsError } from "@/services/errors/invalid-credentials-error";
 import type { FastifyReply, FastifyRequest } from "fastify";
@@ -14,7 +14,7 @@ export const auth = async (request: FastifyRequest, reply: FastifyReply) => {
 
     try {
 
-        const usersRepository = new prismaUsersRepository
+        const usersRepository = new PrismaUsersRepository
         const authenticateUseCase = new AuthenticateUseCase(usersRepository)
 
         const { user } = await authenticateUseCase.execute({

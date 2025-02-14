@@ -8,9 +8,9 @@ describe('Register Use Case', () => {
     it('shoud to be able to register a new user', async () => {
 
         const usersRepository = new InMemoryUsersRepository
-        const registerUseCase = new RegisterUseCase(usersRepository)
+        const sut = new RegisterUseCase(usersRepository)
 
-        const {user} = await registerUseCase.execute({
+        const {user} = await sut.execute({
             username: 'Sung Jin Woo',
             email: 'shadowmonarch@gmail.com',
             password: '04130211'
@@ -23,9 +23,9 @@ describe('Register Use Case', () => {
     it('shoud hash user password upon registration', async () => {
 
         const usersRepository = new InMemoryUsersRepository
-        const registerUseCase = new RegisterUseCase(usersRepository)
+        const sut = new RegisterUseCase(usersRepository)
 
-        const {user} = await registerUseCase.execute({
+        const {user} = await sut.execute({
             username: 'Sung Jin Woo',
             email: 'shadowmonarch@gmail.com',
             password: '04130211'
@@ -40,16 +40,16 @@ describe('Register Use Case', () => {
     it('shoud not be able to register multiple users whith same email', async () => {
 
         const usersRepository = new InMemoryUsersRepository
-        const registerUseCase = new RegisterUseCase(usersRepository)
+        const sut = new RegisterUseCase(usersRepository)
 
-        const {user} = await registerUseCase.execute({
+        const {user} = await sut.execute({
             username: 'Sung Jin Woo',
             email: 'shadowmonarch@gmail.com',
             password: '04130211'
         })
 
-        expect(() =>
-            registerUseCase.execute({
+        await expect(() =>
+            sut.execute({
                 username: 'Sung Jin Woo',
                 email: 'shadowmonarch@gmail.com',
                 password: '04130211'

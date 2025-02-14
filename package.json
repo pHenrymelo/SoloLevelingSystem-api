@@ -8,8 +8,9 @@
     "start": "node build/server.js",
     "migrate": "prisma generate && prisma migrate deploy",
     "build": "tsup src --out-dir build",
-    "test": "jest --passWithNoTests --coverage",
-    "test:watch": "jest --passWithNoTests --coverage --watch"
+    "test": "jest --passWithNoTests",
+    "test:watch": "jest --passWithNoTests --watch",
+    "test:coverage": "jest --passWithNoTests --coverage"
   },
   "keywords": [],
   "author": "",

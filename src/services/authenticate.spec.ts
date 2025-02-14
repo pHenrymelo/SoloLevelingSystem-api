@@ -3,12 +3,20 @@ import { InvalidCredentialsError } from "./errors/invalid-credentials-error";
 import { AuthenticateUseCase } from './authenticate'
 import { hash } from 'bcryptjs'
 
+let usersRepository: InMemoryUsersRepository
+let sut: AuthenticateUseCase
+
 describe('Authenticate Use Case', ()=>{
+    
+    beforeEach(()=>{
+
+        usersRepository = new InMemoryUsersRepository
+        sut = new AuthenticateUseCase(usersRepository)
+
+    })
+
     it('shoud to be able to authenticate', async () => {
-
-        const usersRepository = new InMemoryUsersRepository
-        const sut = new AuthenticateUseCase(usersRepository)
-
+       
         await usersRepository.create({
             username: 'Sung Jin Woo',
             email: 'shadowmonarch@gmail.com',
@@ -25,9 +33,6 @@ describe('Authenticate Use Case', ()=>{
     })
     it('shoud not to be able to authenticate whith wrong email', async () => {
 
-        const usersRepository = new InMemoryUsersRepository
-        const sut = new AuthenticateUseCase(usersRepository)
-
         await usersRepository.create({
             username: 'Sung Jin Woo',
             email: 'shadowmonarch@gmail.com',
@@ -43,9 +48,6 @@ describe('Authenticate Use Case', ()=>{
 
     })
     it('shoud not to be able to authenticate whith wrong password', async () => {
-
-        const usersRepository = new InMemoryUsersRepository
-        const sut = new AuthenticateUseCase(usersRepository)
 
         await usersRepository.create({
             username: 'Sung Jin Woo',

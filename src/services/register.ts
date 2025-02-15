@@ -1,7 +1,9 @@
-import { UsersRepository } from "@/repositories/users-repository"
-import { hash } from "bcryptjs"
 import { UserAlreadyExistsError } from "./errors/user-already-exists-error"
+import { InvalidEmailError } from "./errors/invalid-email-error"
+import { UsersRepository } from "@/repositories/users-repository"
 import type { User } from "@prisma/client"
+import { hash } from "bcryptjs"
+import { InvalidPasswordError } from "./errors/invalid-password-error"
 
 interface registerUCParams {
     username: string,
@@ -17,6 +19,14 @@ export class RegisterUseCase {
     constructor( private usersRepository: UsersRepository){}
 
     async execute({username, email, password}: registerUCParams): Promise <registerUCResponse> {
+
+        if(!email.includes('@') || !email.includes('.')) {
+            throw new InvalidEmailError()
+        }
+
+        if(password.length < 8) {
+            throw new InvalidPasswordError()
+        }
 
         const password_hash = await hash(password, 6)
 

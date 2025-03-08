@@ -8,7 +8,7 @@ export class InMemoryQuestsRepository implements QuestsRepository {
     async create(data: Prisma.QuestUncheckedCreateInput): Promise<Quest> {
 
         const quest = {
-            id: '1',
+            id: data.id ? data.id : "1",
             title: data.title,
             description: data.description,
             completed: false,
@@ -48,25 +48,18 @@ export class InMemoryQuestsRepository implements QuestsRepository {
 
     }
     async delete(id: string) {
-        const quest = this.items.find(item => item.id === id)
+        const index = this.items.findIndex(item => item.id === id)
 
-        if(!quest) {
+        if(index === -1) {
             return null
         }
 
-        this.items.splice(this.items.indexOf(quest), 1)
-        
-        return quest
+        return this.items.splice(index, 1)
 
     }
 
-    async list(){
-        const quests = this.items
-
-        if (!quests) {
-            return null
-        }
-
+    async list(userId: string){
+        const quests = this.items.filter(items => items.userId === userId)
         return quests
     }
 }

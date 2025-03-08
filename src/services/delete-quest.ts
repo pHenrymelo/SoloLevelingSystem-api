@@ -1,4 +1,5 @@
 import type { QuestsRepository } from "@/repositories/quests-repository"
+import { ResourceNotFoundError } from "./errors/resource-not-found-error"
 
 interface deleteQuestsUseCaseParams {
     id: string
@@ -7,9 +8,14 @@ interface deleteQuestsUseCaseParams {
 export class DeleteQuestsUseCase {
     constructor(private questsRepository: QuestsRepository) {}
     
-    async execute({id}: deleteQuestsUseCaseParams){
+    async execute({id}: deleteQuestsUseCaseParams): Promise<void>{
 
-    await this.questsRepository.delete(id)
+        const deleted = await this.questsRepository.delete(id)
+        
+        if (!deleted) {
+            throw new ResourceNotFoundError()
+        }
+
 
     }
 }

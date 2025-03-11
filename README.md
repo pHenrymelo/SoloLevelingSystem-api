@@ -7,12 +7,12 @@ Uma API para um sistema de gerenciamento de hábitos gamificado.
 - [x] Deve ser possivel se autenticar como um usuário.
 - [ ] Deve ser possivel criar o avatar do usuário.
 - [ ] Deve ser possivel visualizar o status do avatar do usuário.
-- [ ] Deve ser possivel criar tarefas.
-- [ ] Deve ser possivel visualizar as tarefas de um usuário.
-- [ ] Deve ser possivel visualizar detalhes de uma tarefa.
+- [x] Deve ser possivel criar tarefas.
+- [x] Deve ser possivel visualizar as tarefas de um usuário.
+- [x] Deve ser possivel visualizar detalhes de uma tarefa.
 - [ ] Deve ser possivel marcar uma tarefa como concluída.
-- [ ] Deve ser possivel editar uma tarefa.
-- [ ] Deve ser possivel deletar uma tarefa.
+- [x] Deve ser possivel editar uma tarefa.
+- [x] Deve ser possivel deletar uma tarefa.
 
 ## RNs (Regras de Negócio)
 

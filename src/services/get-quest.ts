@@ -3,18 +3,18 @@ import type { Quest } from "@prisma/client"
 import { ResourceNotFoundError } from "./errors/resource-not-found-error"
  
 
-interface readQuestUseCaseParams{
+interface GetQuestUseCaseParams{
     id: string
 }
 
-interface readQuestUseCaseResponse {
+interface GetQuestUseCaseResponse {
     quest: Quest
 }
 
-export class ReadQuestUseCase {
+export class GetQuestUseCase {
     constructor(private questsRepository: QuestsRepository) {}
     
-    async execute({id}: readQuestUseCaseParams): Promise <readQuestUseCaseResponse>{
+    async execute({id}: GetQuestUseCaseParams): Promise <GetQuestUseCaseResponse>{
 
 
         const quest = await this.questsRepository.findById(id)

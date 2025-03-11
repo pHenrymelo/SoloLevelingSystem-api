@@ -1,5 +1,5 @@
 import { PrismaUsersRepository } from "@/repositories/prisma/prisma-users-repository";
-import { StatusUseCase } from "@/services/status";
+import { StatusUseCase } from "@/services/get-user-status";
 import { InvalidCredentialsError } from "@/services/errors/invalid-credentials-error";
 import type { FastifyReply, FastifyRequest } from "fastify";
 

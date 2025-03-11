@@ -5,7 +5,7 @@ import { ResourceNotFoundError } from "./errors/resource-not-found-error"
 let questsRepository: InMemoryQuestsRepository
 let sut: GetQuestUseCase
 
-describe('Read Quest Use Case', () => {
+describe('Get Quest Use Case', () => {
 
     beforeEach(()=>{
          questsRepository = new InMemoryQuestsRepository

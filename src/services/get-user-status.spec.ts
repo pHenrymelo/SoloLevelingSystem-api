@@ -1,18 +1,17 @@
 import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository'
-import { StatusUseCase } from './status'
+import { GetStatusUseCase } from './get-user-status'
 import { hash } from 'bcryptjs'
-import { string } from 'zod'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 let usersRepository: InMemoryUsersRepository
-let sut: StatusUseCase
+let sut: GetStatusUseCase
 
 
 describe('status tests', () => {
 
     beforeEach(()=>{
         usersRepository = new InMemoryUsersRepository
-        sut = new StatusUseCase(usersRepository)
+        sut = new GetStatusUseCase(usersRepository)
         })
 
     it('shoud be able to get a user status', async () => {

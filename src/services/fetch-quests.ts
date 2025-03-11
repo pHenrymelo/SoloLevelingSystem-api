@@ -3,6 +3,7 @@ import type { Quest } from "@prisma/client"
  
 interface FetchQuestsUseCaseRequest{
     userId: string
+    page: number
 }
 
 interface FetchQuestsUseCaseResponse {
@@ -12,10 +13,10 @@ interface FetchQuestsUseCaseResponse {
 export class FetchQuestsUseCase {
     constructor(private questsRepository: QuestsRepository) {}
     
-    async execute({userId}:FetchQuestsUseCaseRequest): Promise <FetchQuestsUseCaseResponse>{
+    async execute({userId, page}:FetchQuestsUseCaseRequest): Promise <FetchQuestsUseCaseResponse>{
 
 
-        const quests = await this.questsRepository.list(userId)
+        const quests = await this.questsRepository.list(userId, page)
         
         return{
             quests,

@@ -58,8 +58,15 @@ export class InMemoryQuestsRepository implements QuestsRepository {
 
     }
 
-    async list(userId: string){
-        const quests = this.items.filter(items => items.userId === userId)
+    async list(userId: string, page: number){
+        const quests = this.items
+        .filter(items => items.userId === userId)
+        .slice((page - 1) * 20, page * 20)
         return quests
+    }
+
+    async searchMany(query: string, page: number) {
+        return this.items.filter((item) => item.title.includes(query))
+        .slice((page-1)*20, page*20)
     }
 }

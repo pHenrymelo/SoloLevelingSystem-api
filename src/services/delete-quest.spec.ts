@@ -27,7 +27,7 @@ describe('Delete Quests Use Case', () => {
             })
         ).resolves.toBeUndefined()
 
-        const quests = await questsRepository.list("04130211")
+        const quests = await questsRepository.list("04130211", 1)
         expect(quests).toHaveLength(0)
 
 

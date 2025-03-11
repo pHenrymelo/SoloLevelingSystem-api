@@ -27,6 +27,7 @@ describe('Register Use Case', () => {
 
 
     })
+
     it('shoud hash user password upon registration', async () => {
 
         const {user} = await sut.execute({

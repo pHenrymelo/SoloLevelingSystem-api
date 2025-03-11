@@ -1,5 +1,6 @@
 import type { QuestsRepository } from "@/repositories/quests-repository"
 import type { Quest } from "@prisma/client"
+import { ResourceNotFoundError } from "./errors/resource-not-found-error"
 
 interface updateQuestsUseCaseParams {
     questId: string,
@@ -9,7 +10,7 @@ interface updateQuestsUseCaseParams {
 } 
 
 interface updateQuestsUseCaseResponse {
-    quest: Quest | null
+    quest: Quest
 }
 
 export class UpdateQuestsUseCase {
@@ -23,6 +24,10 @@ export class UpdateQuestsUseCase {
             description,
             completed,
         })
+
+        if(!quest){
+            throw new ResourceNotFoundError()
+        }
 
         return{
             quest,

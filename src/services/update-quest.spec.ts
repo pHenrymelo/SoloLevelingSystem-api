@@ -1,5 +1,6 @@
 import { InMemoryQuestsRepository } from "@/repositories/in-memory/in-memory-quests-repository"
 import { UpdateQuestsUseCase } from "./update-quest"
+import { ResourceNotFoundError } from "./errors/resource-not-found-error"
 
 
 let questsRepository: InMemoryQuestsRepository
@@ -31,6 +32,18 @@ describe('Update Quest Use Case', () => {
         expect(quest?.description).toEqual('100 flexão, 100 abdominal, 100 agachamento + 10km')
         expect(quest?.completed).toBe(true)
 
+
+    })
+
+    it('shoud not to be able to update a inexistent quest data', async () => {
+
+
+        await expect(()=>  sut.execute({
+            questId: "non-existent-id",
+            title: 'treinamnto de força',
+            description: '100 flexão, 100 abdominal, 100 agachamento + 10km',
+            completed: true
+        })).rejects.toBeInstanceOf(ResourceNotFoundError)
 
     })
 
